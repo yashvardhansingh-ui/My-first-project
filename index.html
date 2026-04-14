@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitFlow — Fitness & Diet Planner</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Background ambient orbs -->
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">FitFlow</span>
+      </div>
+
+      <nav class="nav" role="navigation" aria-label="Main navigation">
+        <button class="nav-btn active" data-section="profile">Profile</button>
+        <button class="nav-btn" data-section="bmi">BMI</button>
+        <button class="nav-btn" data-section="workout">Workout</button>
+        <button class="nav-btn" data-section="diet">Diet</button>
+        <button class="nav-btn" data-section="calories">Calories</button>
+      </nav>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+      </button>
+    </div>
+
+    <!-- Mobile hamburger nav -->
+    <div class="mobile-nav">
+      <button class="nav-btn active" data-section="profile">👤</button>
+      <button class="nav-btn" data-section="bmi">📊</button>
+      <button class="nav-btn" data-section="workout">🏋️</button>
+      <button class="nav-btn" data-section="diet">🥗</button>
+      <button class="nav-btn" data-section="calories">🔢</button>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main class="main">
+
+    <!-- ─────────────────────────────────────
+         SECTION 1 · PROFILE
+    ───────────────────────────────────── -->
+    <section class="section active fade-in" id="section-profile" aria-label="User Profile">
+      <div class="section-header">
+        <h1 class="section-title">Your Profile</h1>
+        <p class="section-sub">Set up your details to get a personalised plan.</p>
+      </div>
+
+      <div class="card profile-card">
+        <div class="card-body">
+          <div class="avatar-wrap">
+            <div class="avatar" id="avatarEmoji">👤</div>
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="profileName">Full Name</label>
+              <input type="text" id="profileName" placeholder="Alex Johnson" autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="profileAge">Age</label>
+              <input type="number" id="profileAge" placeholder="25" min="10" max="120" />
+            </div>
+            <div class="field">
+              <label for="profileWeight">Weight (kg)</label>
+              <input type="number" id="profileWeight" placeholder="70" min="20" max="300" step="0.1" />
+            </div>
+            <div class="field">
+              <label for="profileHeight">Height (cm)</label>
+              <input type="number" id="profileHeight" placeholder="170" min="50" max="280" />
+            </div>
+
+            <div class="field field-full">
+              <label>Fitness Goal</label>
+              <div class="goal-pills">
+                <button class="pill active" data-goal="loss">🔥 Weight Loss</button>
+                <button class="pill"        data-goal="maintain">⚖️ Maintain</button>
+                <button class="pill"        data-goal="gain">💪 Muscle Gain</button>
+              </div>
+              <input type="hidden" id="profileGoal" value="loss" />
+            </div>
+          </div>
+
+          <button class="btn btn-primary ripple" id="saveProfile">Save Profile</button>
+          <p class="feedback" id="profileFeedback"></p>
+        </div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="stats-row" id="statsRow">
+        <div class="stat-card">
+          <span class="stat-icon">🎯</span>
+          <span class="stat-label">Goal</span>
+          <span class="stat-val" id="statGoal">—</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">⚖️</span>
+          <span class="stat-label">Weight</span>
+          <span class="stat-val" id="statWeight">—</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">🔥</span>
+          <span class="stat-label">Daily Target</span>
+          <span class="stat-val" id="statTarget">—</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">📏</span>
+          <span class="stat-label">BMI Status</span>
+          <span class="stat-val" id="statBmi">—</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─────────────────────────────────────
+         SECTION 2 · BMI
+    ───────────────────────────────────── -->
+    <section class="section fade-in" id="section-bmi" aria-label="BMI Calculator">
+      <div class="section-header">
+        <h1 class="section-title">BMI Calculator</h1>
+        <p class="section-sub">Know your Body Mass Index and what it means.</p>
+      </div>
+
+      <div class="bmi-layout">
+        <!-- Input card -->
+        <div class="card">
+          <div class="card-body">
+            <div class="field">
+              <label for="bmiHeight">Height (cm)</label>
+              <input type="number" id="bmiHeight" placeholder="170" min="50" max="280" />
+            </div>
+            <div class="field">
+              <label for="bmiWeight">Weight (kg)</label>
+              <input type="number" id="bmiWeight" placeholder="70" min="20" max="300" step="0.1" />
+            </div>
+            <button class="btn btn-primary ripple" id="calcBmi">Calculate BMI</button>
+          </div>
+        </div>
+
+        <!-- Result card -->
+        <div class="card bmi-result-card" id="bmiResultCard" style="display:none">
+          <div class="card-body bmi-result-body">
+            <div class="gauge-wrap">
+              <svg viewBox="0 0 200 120" class="gauge-svg" aria-hidden="true">
+                <defs>
+                  <linearGradient id="gGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%"   stop-color="#60efff"/>
+                    <stop offset="45%"  stop-color="#00ff87"/>
+                    <stop offset="100%" stop-color="#ff6b6b"/>
+                  </linearGradient>
+                </defs>
+                <!-- Track -->
+                <path d="M20,105 A80,80 0 0,1 180,105" fill="none"
+                      stroke="rgba(255,255,255,0.08)" stroke-width="16" stroke-linecap="round"/>
+                <!-- Fill -->
+                <path d="M20,105 A80,80 0 0,1 180,105" fill="none"
+                      stroke="url(#gGrad)" stroke-width="16" stroke-linecap="round"
+                      stroke-dasharray="251" stroke-dashoffset="251" id="gaugeFill"/>
+                <!-- Needle -->
+                <line x1="100" y1="105" x2="100" y2="35"
+                      stroke="white" stroke-width="2.5" stroke-linecap="round"
+                      id="gaugeNeedle" style="transform-origin:100px 105px"/>
+                <circle cx="100" cy="105" r="5" fill="white"/>
+              </svg>
+              <div class="gauge-center">
+                <div class="bmi-number" id="bmiNumber">--</div>
+                <div class="bmi-unit">BMI</div>
+              </div>
+            </div>
+
+            <div class="bmi-badge" id="bmiBadge">—</div>
+
+            <div class="bmi-scale">
+              <div class="scale-seg under">
+                <span class="seg-dot"></span>
+                <span>Underweight</span>
+                <span class="seg-range">&lt;18.5</span>
+              </div>
+              <div class="scale-seg normal">
+                <span class="seg-dot"></span>
+                <span>Normal</span>
+                <span class="seg-range">18.5–24.9</span>
+              </div>
+              <div class="scale-seg over">
+                <span class="seg-dot"></span>
+                <span>Overweight</span>
+                <span class="seg-range">25–29.9</span>
+              </div>
+              <div class="scale-seg obese">
+                <span class="seg-dot"></span>
+                <span>Obese</span>
+                <span class="seg-range">&ge;30</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─────────────────────────────────────
+         SECTION 3 · WORKOUT
+    ───────────────────────────────────── -->
+    <section class="section fade-in" id="section-workout" aria-label="Workout Planner">
+      <div class="section-header">
+        <h1 class="section-title">Workout Planner</h1>
+        <p class="section-sub">Check off your sessions and stay consistent.</p>
+      </div>
+
+      <!-- Weekly grid injected by JS -->
+      <div class="workout-grid" id="workoutGrid"></div>
+
+      <!-- Summary bar -->
+      <div class="card workout-summary-card">
+        <div class="card-body workout-summary-body">
+          <div class="ws-info">
+            <span class="ws-label">Weekly Completion</span>
+            <span class="ws-count"><span id="wDone">0</span> / <span id="wTotal">0</span> sessions</span>
+          </div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar gradient-bar" id="workoutBar" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─────────────────────────────────────
+         SECTION 4 · DIET
+    ───────────────────────────────────── -->
+    <section class="section fade-in" id="section-diet" aria-label="Diet Planner">
+      <div class="section-header">
+        <h1 class="section-title">Diet Planner</h1>
+        <p class="section-sub">Structured meals tailored to your fitness goal.</p>
+      </div>
+
+      <div class="card diet-control-card">
+        <div class="card-body diet-control-body">
+          <span class="diet-label">Generate plan for:</span>
+          <div class="goal-pills">
+            <button class="pill active" data-diet="loss">🔥 Weight Loss</button>
+            <button class="pill"        data-diet="maintain">⚖️ Maintain</button>
+            <button class="pill"        data-diet="gain">💪 Muscle Gain</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="meals-grid" id="mealsGrid"></div>
+    </section>
+
+
+    <!-- ─────────────────────────────────────
+         SECTION 5 · CALORIES
+    ───────────────────────────────────── -->
+    <section class="section fade-in" id="section-calories" aria-label="Calorie Tracker">
+      <div class="section-header">
+        <h1 class="section-title">Calorie Tracker</h1>
+        <p class="section-sub">Log food and monitor your daily intake.</p>
+      </div>
+
+      <!-- Progress overview -->
+      <div class="card calorie-card">
+        <div class="card-body">
+          <div class="calorie-top">
+            <div class="calorie-big">
+              <span id="calConsumed">0</span>
+              <span class="cal-unit">kcal consumed</span>
+            </div>
+            <div class="target-wrap">
+              <label for="calTarget">Daily target</label>
+              <div class="target-input-row">
+                <input type="number" id="calTarget" class="target-input" value="2000" min="500" max="6000" step="50"/>
+                <span class="kcal-chip">kcal</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="progress-bar-wrap large">
+            <div class="progress-bar gradient-bar" id="calBar" style="width:0%"></div>
+            <span class="bar-pct" id="calPct">0%</span>
+          </div>
+
+          <div class="calorie-footer">
+            <span id="calRemaining">2000</span> kcal remaining
+          </div>
+        </div>
+      </div>
+
+      <!-- Add food -->
+      <div class="card">
+        <div class="card-body add-food-body">
+          <div class="field flex1">
+            <label for="foodName">Food / Drink</label>
+            <input type="text" id="foodName" placeholder="e.g. Chicken breast" />
+          </div>
+          <div class="field">
+            <label for="foodCal">Calories</label>
+            <input type="number" id="foodCal" placeholder="350" min="1" max="5000" />
+          </div>
+          <button class="btn btn-primary ripple" id="addFood">+ Add</button>
+        </div>
+      </div>
+
+      <!-- Food log list -->
+      <ul class="food-list" id="foodList" aria-label="Food log"></ul>
+
+      <div class="clear-wrap" id="clearWrap" style="display:none">
+        <button class="btn btn-ghost" id="clearAll">🗑 Clear All</button>
+      </div>
+    </section>
+
+  </main><!-- /main -->
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
